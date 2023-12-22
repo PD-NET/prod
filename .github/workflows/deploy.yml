@@ -24,8 +24,4 @@ jobs:
           tf_stack_destroy: true
           tf_state_bucket_destroy: true
           ansible_skip: false
-<<<<<<< HEAD:deploy.yml
           aws_vpc_create: true
-=======
-          aws_vpc_create: true
->>>>>>> 9c202c70a9848d4083ec386a9aed2e1b2134577d:.github/workflows/deploy.yml
