@@ -8,4 +8,4 @@ RUN npm install http-server -g
 
 EXPOSE 3000
 
-CMD ["http-server", "-p", "3000"]
+CMD ["http-server", "-a", "0.0.0.0", "-p", "3000", "-o", "/index.html"]
