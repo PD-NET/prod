@@ -2,7 +2,7 @@ FROM node:14
 
 WORKDIR /app
 
-COPY ./client /app
+COPY . /app
 
 RUN npm install http-server -g
 

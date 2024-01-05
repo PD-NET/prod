@@ -1,12 +1,11 @@
-version: '3.8'
-
+version: "3.8"
 services:
-  node-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  my-app:
+    build: .
+    image: profile
     ports:
       - "3000:3000"
-    working_dir: /app/client
-
-    
+    volumes:
+      - ./src:/app/src
+    environment:
+      PORT: 3000
