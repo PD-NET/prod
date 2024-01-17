@@ -1,32 +1,43 @@
 <?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Connect to your MySQL database (update with your credentials)
+    $conn = new mysqli("localhost", "root", "", "users");
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "users";
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-$admin='Meghanath';
-$pass='1234';
+    // Sanitize and validate input data
+    $username = $_POST["username"];
+    $password = $_POST["password"];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-if($_POST['us']==$admin && $_POST['pa']==$pass)
-{
-  echo "<script>
-    
-    window.location.href='options.html';  
-    
-    </script>";
-}
-else{
-  echo "<script>
-   alert('Incorrect Login Info');
-  window.location.href='admin.html';  
-  
-  </script>";
+    // Check user credentials
+    $sql = "SELECT * FROM users WHERE username = '$username'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row["password"])) {
+            echo "Login successful!";
+            header('Location: index.html');
+            // You can redirect the user to a dashboard or another page here
+        } else {
+          echo '<script type="text/javascript">
+          window.onload = function () { alert("Invalid Password");
+            onclick = location.href="login.html"; }
+    </script>'; 
+        }
+    } else {
+      echo '<script type="text/javascript">
+      window.onload = function () { alert("User Not found");
+        onclick = location.href="login.html"; }
+</script>'; 
+
+    }
+
+    // Close the database connection
+    $conn->close();
 }
 ?>
