@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Connect to your MySQL database (update with your credentials)
@@ -22,8 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row["password"])) {
             echo "Login successful!";
-            $_SESSION['username'] = $username;
-            header('Location: index.php');
+            header('Location: index.html');
             // You can redirect the user to a dashboard or another page here
         } else {
           echo '<script type="text/javascript">
